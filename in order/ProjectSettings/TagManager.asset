@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - workplease
+  - hamper
+  - bookshelf
+  - bed
+  - desk
+  - chair
   layers:
   - Default
   - TransparentFX
