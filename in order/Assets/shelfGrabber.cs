@@ -13,6 +13,7 @@ public class shelfGrabber : OVRGrabbable
     public bool isGrab = true;
     private Transform target;
     public GameObject cube2;
+    public AudioSource audioData;
 
 
 
@@ -22,6 +23,7 @@ public class shelfGrabber : OVRGrabbable
         base.Start();
         testlight.GetComponent<Light>().intensity = 0;
         testparticles.SetActive(false);
+        audioData = GetComponent<AudioSource>();
         Debug.Log("yay!");
     }
 
@@ -66,8 +68,9 @@ public class shelfGrabber : OVRGrabbable
         if (isGrab == false && isTriggered == true)
         {
             Debug.Log("good job!");
-            transform.position = new Vector3(2.15f, 1.46f, 1.11f);
-            cube2.transform.rotation = Quaternion.Euler(-90.0f, 9.0f, -278.0f);
+            transform.position = new Vector3(2.15f, 1.5f, 1.11f);
+            cube2.transform.rotation = Quaternion.Euler(-90.0f, 0.0f, -269.0f);
+            audioData.Play(0);
         }
         Debug.Log("it worked!");
     }
