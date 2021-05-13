@@ -9,12 +9,10 @@ public class deskGrabber : OVRGrabbable
    
     public GameObject testparticles2;
     public bool isTriggered = false;
+    public GameObject destroycube;
     public bool isGrab = true;
     private Transform target;
     public GameObject cube2;
-    AudioSource source;
-    public AudioClip grabSound;
-    public AudioClip placeSound;
 
 
 
@@ -24,7 +22,6 @@ public class deskGrabber : OVRGrabbable
         base.Start();
         testlight.GetComponent<Light>().intensity = 0;
         testparticles.SetActive(false);
-        source = GetComponent<AudioSource>();
         Debug.Log("yay!");
     }
 
@@ -38,8 +35,7 @@ public class deskGrabber : OVRGrabbable
         testlight.GetComponent<Light>().color = new Color(0.11F, 0.78F, 0.12F);
         testparticles.SetActive(true);
         isGrab = true;
-        source.PlayOneShot(grabSound, 0.7f);
-
+    
 
 
         Debug.Log("yay2!");
@@ -52,8 +48,9 @@ public class deskGrabber : OVRGrabbable
         testlight.GetComponent<Light>().color = new Color(0.61F, 0.18F, 0.12F);
         testparticles.SetActive(false);
         isGrab = false;
-
+        
     }
+
     void Update()
     {
       
@@ -71,7 +68,6 @@ public class deskGrabber : OVRGrabbable
             Debug.Log("good job!");
             transform.position = new Vector3(1.06f, 1.21f, -0.84f);
             cube2.transform.rotation = Quaternion.Euler(-90.0f, 99.5f, -9.0f);
-            source.PlayOneShot(placeSound, 0.7f);
         }
         Debug.Log("it worked!");
     }
