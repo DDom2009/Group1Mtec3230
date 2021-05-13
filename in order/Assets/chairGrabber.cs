@@ -15,6 +15,7 @@ public class chairGrabber : OVRGrabbable
     AudioSource source;
     public AudioClip grabSound;
     public AudioClip placeSound;
+    public bool hasPlayed = false;
 
 
 
@@ -56,7 +57,10 @@ public class chairGrabber : OVRGrabbable
     }
     void Update()
     {
-
+        if (hasPlayed)
+        {
+            Destroy(GetComponent<AudioSource>(), 1.0f);
+        }
     }
 
 
@@ -73,6 +77,7 @@ public class chairGrabber : OVRGrabbable
             transform.position = new Vector3(0.91f, 0.97f, -0.34f);
             cube2.transform.rotation = Quaternion.Euler(-90.0f, 0.0f, 183.43f);
             source.PlayOneShot(placeSound, 0.7f);
+            hasPlayed = true;
         }
         Debug.Log("it worked!");
     }

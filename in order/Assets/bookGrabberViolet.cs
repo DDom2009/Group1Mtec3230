@@ -15,6 +15,7 @@ public class bookGrabberViolet : OVRGrabbable
     AudioSource source;
     public AudioClip grabSound;
     public AudioClip placeSound;
+    public bool hasPlayed = false;
 
 
 
@@ -56,7 +57,10 @@ public class bookGrabberViolet : OVRGrabbable
     }
     void Update()
     {
-
+        if (hasPlayed)
+        {
+            Destroy(GetComponent<AudioSource>(), 1.0f);
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -72,6 +76,7 @@ public class bookGrabberViolet : OVRGrabbable
             transform.position = new Vector3(2.13f, 1.68f, 0.88f);
             cube4.transform.rotation = Quaternion.Euler(-90.0f, 0.0f, 181.5f);
             source.PlayOneShot(placeSound, 0.7f);
+            hasPlayed = true;
         }
         Debug.Log("it worked!");
     }

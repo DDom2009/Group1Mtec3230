@@ -15,6 +15,7 @@ public class deskGrabber : OVRGrabbable
     AudioSource source;
     public AudioClip grabSound;
     public AudioClip placeSound;
+    public bool hasPlayed = false;
 
 
 
@@ -56,7 +57,10 @@ public class deskGrabber : OVRGrabbable
     }
     void Update()
     {
-      
+        if (hasPlayed)
+        {
+            Destroy(GetComponent<AudioSource>(), 1.0f);
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -72,6 +76,7 @@ public class deskGrabber : OVRGrabbable
             transform.position = new Vector3(1.06f, 1.21f, -0.84f);
             cube2.transform.rotation = Quaternion.Euler(-90.0f, 99.5f, -9.0f);
             source.PlayOneShot(placeSound, 0.7f);
+            hasPlayed = true;
         }
         Debug.Log("it worked!");
     }

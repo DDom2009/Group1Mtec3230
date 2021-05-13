@@ -15,7 +15,7 @@ public class hamperGrabber : OVRGrabbable
     AudioSource source;
     public AudioClip grabSound;
     public AudioClip placeSound;
-
+    public bool hasPlayed = false;
 
 
     // Start is called before the first frame update
@@ -56,7 +56,10 @@ public class hamperGrabber : OVRGrabbable
     }
     void Update()
     {
-
+        if (hasPlayed)
+        {
+            Destroy(GetComponent<AudioSource>(), 1.0f);
+        }
     }
 
 
@@ -73,6 +76,7 @@ public class hamperGrabber : OVRGrabbable
             transform.position = new Vector3(1.29f, 1.05f, 2.25f);
             cube1.transform.rotation = Quaternion.Euler(-90.0f, 0.0f, 0.0f);
             source.PlayOneShot(placeSound, 0.7f);
+            hasPlayed = true;
         }
         Debug.Log("it worked!");
     }
