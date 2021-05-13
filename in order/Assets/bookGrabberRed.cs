@@ -6,13 +6,15 @@ public class bookGrabberRed: OVRGrabbable
 {
     [SerializeField] public GameObject testlight;
     [SerializeField] public GameObject testparticles;
-   
+
     public GameObject testparticles2;
     public bool isTriggered = false;
-    public GameObject destroycube;
     public bool isGrab = true;
     private Transform target;
     public GameObject cube4;
+    AudioSource source;
+    public AudioClip grabSound;
+    public AudioClip placeSound;
 
 
 
@@ -22,6 +24,7 @@ public class bookGrabberRed: OVRGrabbable
         base.Start();
         testlight.GetComponent<Light>().intensity = 0;
         testparticles.SetActive(false);
+        source = GetComponent<AudioSource>();
         Debug.Log("yay!");
     }
 
@@ -35,7 +38,8 @@ public class bookGrabberRed: OVRGrabbable
         testlight.GetComponent<Light>().color = new Color(0.11F, 0.78F, 0.12F);
         testparticles.SetActive(true);
         isGrab = true;
-    
+        source.PlayOneShot(grabSound, 0.7f);
+
 
 
         Debug.Log("yay2!");
@@ -48,12 +52,11 @@ public class bookGrabberRed: OVRGrabbable
         testlight.GetComponent<Light>().color = new Color(0.61F, 0.18F, 0.12F);
         testparticles.SetActive(false);
         isGrab = false;
-        
-    }
 
+    }
     void Update()
     {
-      
+
     }
 
     void OnTriggerEnter(Collider other)
@@ -68,6 +71,7 @@ public class bookGrabberRed: OVRGrabbable
             Debug.Log("good job!");
             transform.position = new Vector3(2.12f, 1.69f, 0.94f);
             cube4.transform.rotation = Quaternion.Euler(-90.0f, 0.0f, 172.8f);
+            source.PlayOneShot(placeSound, 0.7f);
         }
         Debug.Log("it worked!");
     }
